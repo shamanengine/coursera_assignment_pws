@@ -78,7 +78,6 @@ def delete_u1():
     return deleted
 
 
-# ???
 def unsubscribe_u2_from_blogs():
     """Отписать пользователя с first_name u2 от блогов"""
     users = User.objects.filter(first_name="u2")
@@ -113,8 +112,7 @@ def get_topic_created_grated():
 
 def get_topic_title_ended():
     """Найти топик у которого title заканчивается на content"""
-    # return Topic.objects.filter(title__endswith="content")
-    return Topic.objects.filter()
+    return Topic.objects.filter(title__endswith="content")
 
 
 def get_user_with_limit():
@@ -135,17 +133,17 @@ def get_avg_topic_count():
 
 def get_blog_that_have_more_than_one_topic():
     """Найти блоги, в которых топиков больше одного"""
-    pass
-
+    # return Blog.objects.annotate(topic_count=Count('topic')).filter(topic_count__gt=1)
+    return Blog.objects.annotate(topic_count=Count('topic')).filter(topic_count__gt=1)
 
 def get_topic_by_u1():
     """Получить все топики автора с first_name u1"""
-    pass
+    return Topic.author.objects.filter(first_name="u1")
 
 
 def get_user_that_dont_have_blog():
     """Найти пользователей, у которых нет блогов, отсортировать по возрастанию id"""
-    pass
+    return User.blog_set.objects.order_by(id)
 
 
 def get_topic_that_like_all_users():
